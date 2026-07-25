@@ -1,4 +1,6 @@
 import pygame
+from pygame.sprite import Sprite
+
 from player import Player
 from constants import *
 from asteroid import Asteroid
@@ -44,6 +46,11 @@ def main():
                 log_event("player_hit")
                 print("Game Over")
                 sys.exit()
+            for shot in shots:
+                if shot.collides_with(obj) == True:
+                    log_event("asteroid_shot")
+                    shot.kill()
+                    obj.split()
         pygame.display.flip()
         dt = clock.tick(60) / 1000
 
